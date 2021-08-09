@@ -1,7 +1,6 @@
 import express from 'express';
 import validUrl from 'valid-url';
 import { urlModel } from '../database/model.js';
-import shortid, { characters } from 'shortid';
 const longurlRouter = express.Router();
 const shorturlRouter = express.Router();
 
