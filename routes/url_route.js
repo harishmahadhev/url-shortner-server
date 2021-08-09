@@ -46,17 +46,21 @@ longurlRouter.route("/:id").delete(async (req, res) => {
         res.send(error)
     }
 })
-shorturlRouter.route("/:code").get(async (req, res) => {
-    try {
-        const url = await urlModel.findOne({ urlcode: req.params.code });
-        if (!url) {
-            return res.status(404).json("Invalid URL")
-        } else {
-            return res.redirect(url.longurl)
+shorturlRouter
+    .route("/").get(async (req, res) => {
+        req.send("Welcome")
+    })
+    .route("/:code").get(async (req, res) => {
+        try {
+            const url = await urlModel.findOne({ urlcode: req.params.code });
+            if (!url) {
+                return res.status(404).json("Invalid URL")
+            } else {
+                return res.redirect(url.longurl)
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json("server Error")
         }
-    } catch (error) {
-        console.log(error);
-        res.status(500).json("server Error")
-    }
-})
+    })
 export { longurlRouter, shorturlRouter };
