@@ -1,0 +1,21 @@
+{
+  "name": "url-shortner-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.5",
+    "nodemon": "^2.0.12",
+    "puppeteer": "^10.2.0",
+    "shortid": "^2.2.16",
+    "valid-url": "^1.0.9"
+  }
+}
