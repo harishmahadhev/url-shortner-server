@@ -9,10 +9,15 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "googleapis": "^84.0.0",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.5",
+    "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
     "valid-url": "^1.0.9"
   }

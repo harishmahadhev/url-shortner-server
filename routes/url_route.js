@@ -63,9 +63,12 @@ shorturlRouter
     .route("/:code").get(async (req, res) => {
         try {
             const url = await urlModel.findOne({ urlcode: req.params.code });
+
             if (!url) {
                 return res.status(404).json("Invalid URL")
             } else {
+                url.clicks++;
+                url.save();
                 return res.redirect(url.longurl)
             }
         } catch (error) {
