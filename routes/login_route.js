@@ -102,6 +102,7 @@ loginRouter
 
         }
     })
+// Password Reset
 loginRouter
     .route("/reset")
     .post(async (req, res) => {
