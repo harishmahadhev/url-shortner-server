@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken';
 import bycrpt from 'bcryptjs';
 import crypto from "crypto";
 import { loginModel } from '../database/model.js';
-import { signinValidation, signupValidation } from '../validation/validation.js';
-import { activateMail, resetMail } from './mailer.js';
+import { signinValidation, signupValidation } from '../shared/validation.js';
+import { activateMail, resetMail } from '../shared/mailer.js';
 
 const loginRouter = express.Router();
 
