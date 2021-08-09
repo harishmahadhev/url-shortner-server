@@ -1,9 +1,19 @@
 import express from 'express';
 import validUrl from 'valid-url';
 import { urlModel } from '../database/model.js';
-import shortid from 'shortid';
+import shortid, { characters } from 'shortid';
 const longurlRouter = express.Router();
 const shorturlRouter = express.Router();
+
+function generateurl() {
+    var result = "";
+    var char = "ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charlen = char.length;
+    for (var i = 0; i < 5; i++) {
+        result += char.charAt(Math.floor(Math.random() * charlen));
+    }
+    return result;
+}
 
 longurlRouter.route("/")
     .get(async (req, res) => {
@@ -14,7 +24,7 @@ longurlRouter.route("/")
     .post(async (req, res) => {
         const { longurl } = req.body;
         var baseUrl = req.protocol + '://' + req.get('host');
-        const urlCode = shortid.generate();
+        const urlCode = generateurl();
 
         if (!validUrl.isUri(baseUrl)) return res.status(401).json("Invalid base Url");
 
