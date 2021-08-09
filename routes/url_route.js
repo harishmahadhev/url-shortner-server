@@ -50,6 +50,7 @@ shorturlRouter
     .route("/").get(async (req, res) => {
         req.send("Welcome")
     })
+shorturlRouter
     .route("/:code").get(async (req, res) => {
         try {
             const url = await urlModel.findOne({ urlcode: req.params.code });
