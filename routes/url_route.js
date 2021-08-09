@@ -48,7 +48,7 @@ longurlRouter.route("/:id").delete(async (req, res) => {
 })
 shorturlRouter
     .route("/").get(async (req, res) => {
-        req.send("Welcome")
+        res.send("Welcome")
     })
 shorturlRouter
     .route("/:code").get(async (req, res) => {
