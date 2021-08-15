@@ -30,7 +30,7 @@ loginRouter.route("/signup")
                 await result.save();
                 const mail = await activateMail(email, token);
                 if (!mail) return res.status(409).json({ message: "Something went wrong, Make sure you entered valid email" })
-                res.status(200).json({ message: "Please Check the mail to activate the account (check spam folder also)" })
+                res.status(200).json({ message: "Please Check the mail to activate the account (including spam folder)" })
             })
         } catch (error) {
             res.send(error)
