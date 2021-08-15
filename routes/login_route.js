@@ -65,6 +65,7 @@ loginRouter
     .route("/signin")
     .post(async (req, res) => {
         const { email, password } = req.body;
+        const maxAge = 3 * 24 * 60 * 60;
         try {
             const { error } = signinValidation(req.body);
             if (error) return res.status(401).json({ message: error.details[0].message });
@@ -73,7 +74,8 @@ loginRouter
             if (!user.active) return res.status(406).json({ message: "Please check your mail and Activate your account" })
             const isPasswordCorrect = await bycrpt.compare(password, user.password);
             if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials" });
-            const token = jwt.sign({ email: user.email, id: user._id }, "urlshort", { expiresIn: "3h" })
+            const token = jwt.sign({ email: user.email, id: user._id }, "url user", { expiresIn: maxAge })
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
             res.status(200).json({ message: "Login Successfull", token, data: user })
         } catch (error) {
             res.send(error)

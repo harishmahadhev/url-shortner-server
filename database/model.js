@@ -4,7 +4,7 @@ const urlSchema = new mongoose.Schema({
     shorturl: { type: String, required: true },
     urlcode: { type: String, required: true, unique: true },
     clicks: { type: Number, required: true, default: 0 },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now() }
 })
 const loginSchema = new mongoose.Schema({
     name: { type: String, required: true },

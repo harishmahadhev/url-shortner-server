@@ -18,7 +18,6 @@ longurlRouter.route("/")
     .get(async (req, res) => {
         const url = await urlModel.find();
         res.status(200).json(url);
-
     })
     .post(async (req, res) => {
         const { longurl } = req.body;
