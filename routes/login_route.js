@@ -100,7 +100,7 @@ loginRouter
                 res.status(200).json({ message: "Please Check the mail to reset your password (check spam folder also)" })
             })
         } catch (error) {
-
+            console.log(error)
         }
     })
 // Password Reset
