@@ -20,7 +20,7 @@ loginRouter.route("/signup")
             const { error } = signupValidation(req.body);
             if (error) return res.status(401).json({ message: error.details[0].message });
             const IsExist = await loginModel.findOne({ email })
-            if (IsExist) return res.status(406).json({ message: "User Already Exists" });
+            if (IsExist) return res.status(406).json({ message: "Email  Already Exists" });
             const salt = await bycrpt.genSalt(12);
             password = await bycrpt.hash(req.body.password, salt);
             crypto.randomBytes(32, async (err, buffer) => {
@@ -52,7 +52,7 @@ loginRouter
         const user = await loginModel.findOne({ resettoken: token, expiretoken: { $gt: Date.now() } })
         if (!user) {
             await loginModel.findOneAndRemove({ resettoken: token })
-            return res.status(408).json({ message: "Request Timeout Please Try again Later" })
+            return res.status(408).json({ message: "Request Timeout Please create your account again" })
         }
         user.active = true;
         user.resettoken = undefined;
@@ -75,7 +75,7 @@ loginRouter
             const isPasswordCorrect = await bycrpt.compare(password, user.password);
             if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials" });
             const token = jwt.sign({ email: user.email, id: user._id }, "url user", { expiresIn: maxAge })
-            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000, secure: true })
             res.status(200).json({ message: "Login Successfull", token, data: user })
         } catch (error) {
             res.send(error)
