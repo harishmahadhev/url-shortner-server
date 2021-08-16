@@ -20,7 +20,7 @@ longurlRouter.route("/")
         res.status(200).json(url);
     })
     .post(async (req, res) => {
-        const { longurl } = req.body;
+        const { longurl, userId } = req.body;
         var baseUrl = req.protocol + '://' + req.get('host');
         const urlCode = generateurl();
 
@@ -33,7 +33,7 @@ longurlRouter.route("/")
                     res.json(url);
                 } else {
                     const shortUrl = baseUrl + "/" + urlCode;
-                    url = new urlModel({ longurl, shorturl: shortUrl, date: new Date(), urlcode: urlCode })
+                    url = new urlModel({ longurl, shorturl: shortUrl, date: new Date(), urlcode: urlCode, user: userId })
                     await url.save();
                     res.json(url);
                 }

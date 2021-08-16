@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const urlSchema = new mongoose.Schema({
+    user: { type: String },
     longurl: { type: String, required: true },
     shorturl: { type: String, required: true },
     urlcode: { type: String, required: true, unique: true },
