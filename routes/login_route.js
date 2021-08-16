@@ -33,7 +33,7 @@ loginRouter.route("/signup")
                 res.status(200).json({ message: "Please Check the mail to activate the account (including spam folder)" })
             })
         } catch (error) {
-            res.send(error)
+            res.json({ message: error })
         }
     })
 loginRouter
@@ -77,7 +77,7 @@ loginRouter
             const token = jwt.sign({ email: user.email, id: user._id }, "url user", { expiresIn: maxAge })
             res.status(200).json({ message: "Login Successfull", token, data: user })
         } catch (error) {
-            res.send(error)
+            res.json({ message: error })
         }
     })
 
@@ -100,7 +100,7 @@ loginRouter
                 res.status(200).json({ message: "Please Check the mail to reset your password (check spam folder also)" })
             })
         } catch (error) {
-            console.log(error)
+            res.json({ message: error })
         }
     })
 // Password Reset
@@ -119,7 +119,7 @@ loginRouter
             await user.save()
             res.status(200).json({ message: "Password is updated Successfully" })
         } catch (error) {
-            res.send(error)
+            res.json({ message: error })
         }
     })
 
